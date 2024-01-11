@@ -1,0 +1,49 @@
+.new-doc-container {
+    background-color: rgb(224, 220, 220);
+    display: flex;
+    justify-content: center;
+    margin-top: 155px;
+
+
+
+    // width: 100vh;
+    width: 100vh;
+    // overflow-y:auto;
+
+  
+    .new-doc-inner {
+      width: 100vh;
+      margin-left:20px;
+      
+  
+      .start-doc{
+        width: 170px;
+        height: 230px;
+        cursor: pointer;
+        border: 1px solid #bcbcbc;
+  
+        border-radius: 3px;
+        
+      }
+  
+      .start-doc:hover {
+        border: 1px solid #7492de;
+      }
+  
+      .title,p {
+        margin-top: 5px;
+        color: grey;
+        font-weight: bold;
+        font-size: larger;
+      }
+    }
+  }
+  
+  @media (min-width: 767px) {
+    .new-doc-container {
+      text-align: center;
+    }
+
+    
+  }
+
