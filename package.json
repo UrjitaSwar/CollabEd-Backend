@@ -12,10 +12,12 @@
   "dependencies": {
     "@syncfusion/ej2-react-documenteditor": "^24.1.45",
     "antd": "^5.12.7",
+    "docxtemplater": "^3.43.0",
     "file-saver": "^2.0.2",
     "firebase": "^10.7.1",
     "fs": "0.0.1-security",
     "moment": "^2.30.1",
+    "pizzip": "^3.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icon": "^1.0.0",
@@ -24,7 +26,8 @@
     "react-redux": "^9.0.4",
     "react-scripts": "3.0.1",
     "sass": "^1.69.7",
-    "save": "^2.9.0"
+    "save": "^2.9.0",
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.7",
