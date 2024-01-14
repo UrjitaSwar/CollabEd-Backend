@@ -1,0 +1,23 @@
+@import url("./SCSS/Docs.scss");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: "Noto Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // overflow-y: auto;
+
+  /* hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  // width: 100vh;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
