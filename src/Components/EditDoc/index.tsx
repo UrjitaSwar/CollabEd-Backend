@@ -8,14 +8,18 @@ import { editDoc,getCurrentDoc } from "../../API/Firestore";
 import { saveAs } from "file-saver";
 
 import { deleteDocument } from "../../API/Firestore";
-
+import {io} from 'socket.io-client'
 
 import { FaArrowLeft } from "react-icons/fa";
 
+import { Quill } from "react-quill";
 
 
 // import { firestore } from "../../firebaseConfig";
 export default function EditDoc({ handleEdit,id}: functionInterface) {
+
+  
+
   const quillRef = useRef<any>(null)
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
@@ -139,7 +143,48 @@ function saveTodoc() {
 // }
 
 
+// (function() {
+//   var mousePos:any;
 
+//   document.onmousemove = handleMouseMove;
+//   setInterval(getMousePosition, 100); // setInterval repeats every X ms
+
+//   function handleMouseMove(event:any) {
+//       var dot, eventDoc, doc, body, pageX, pageY;
+
+//       event = event || window.event; // IE-ism
+
+//       // If pageX/Y aren't available and clientX/Y are,
+//       // calculate pageX/Y - logic taken from jQuery.
+//       // (This is to support old IE)
+//       if (event.pageX == null && event.clientX != null) {
+//           eventDoc = (event.target && event.target.ownerDocument) || document;
+//           doc = eventDoc.documentElement;
+//           body = eventDoc.body;
+
+//           event.pageX = event.clientX +
+//             (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+//             (doc && doc.clientLeft || body && body.clientLeft || 0);
+//           event.pageY = event.clientY +
+//             (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+//             (doc && doc.clientTop  || body && body.clientTop  || 0 );
+//       }
+
+//       mousePos = {
+//           x: event.pageX,
+//           y: event.pageY
+//       };
+//   }
+//   function getMousePosition() {
+//       var pos = mousePos;
+//       if (!pos) {
+//           // We haven't seen any movement yet
+//       }
+//       else {
+//           // Use pos.x and pos.y
+//       }
+//   }
+// })();
 
 
 useEffect(()=>{
@@ -148,6 +193,46 @@ useEffect(()=>{
 
 
 },[currentDocument])
+
+const [socket,setSocket]=useState();
+  const [quill,setquill]=useState();
+  useEffect(()=>{
+    // const sn= io("http://localhost:3001/");
+    const s=io("http://localhost:3001");
+    setSocket(s);
+    return ()=>{
+      s.disconnect()
+    }
+  },[])
+
+  useEffect(()=>{
+
+    if(socket==null || quill ==null) return;
+
+    const handler=(delta:any,)=>{
+      quill.updateContents(delta)
+    }
+
+    socket.on('receive-changes',handler)
+    return ()=>{
+      socket.off('receive-changes',handler)
+    }
+  },[socket,quill])
+
+  useEffect(()=>{
+
+    if(socket==null || quill ==null) return;
+
+    const handler=(delta:any,oldDelta:any,source:any)=>{
+      if(source!=='user') return;
+      socket.emit("send-changes",delta)
+    }
+
+    quill.on('text-change',handler)
+    return ()=>{
+      quill.off('text-change',handler)
+    }
+  },[socket,quill])
 
 return(
 
