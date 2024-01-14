@@ -34,7 +34,7 @@ export const createDoc = (payload: payloadType) => {
     userId: auth.currentUser?.uid,
     userName: auth.currentUser?.displayName,
     createdAt:serverTimestamp(),
-    modifiedAt:serverTimestamp()
+    // modifiedAt:serverTimestamp()
     // modifiedAt:Timestamp
     // modifiedAt:docRef.update({ updated_at:modifiedAt})
   });
@@ -53,10 +53,10 @@ export const getDocuments=(setDocs:any)=>{
 
 
 
-export const editDoc = (payload:any,id:string,modifiedAt:Timestamp) => {
+export const editDoc = (payload:any,id:string) => {
 
   const docToEdit=doc(docs,id)
-  updateDoc(docToEdit,{...payload},id,modifiedAt);
+  updateDoc(docToEdit,{...payload,modifiedAt:serverTimestamp()},id);
 
         // const docRef = db.collection('docs').doc(id);    
 
