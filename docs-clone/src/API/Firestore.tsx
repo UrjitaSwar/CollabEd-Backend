@@ -80,7 +80,7 @@ export const getCurrentDoc = (id:string,setCurrentDocument:any) => {
 
   getDoc(docToGet).then((response)=>{
     setCurrentDocument(response.data())
-
+    // console.log(response.data(),"::::response")
   }).catch((err)=>{
     console.log(err)
   })

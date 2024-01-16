@@ -12,21 +12,34 @@ import {io} from 'socket.io-client'
 
 import { FaArrowLeft } from "react-icons/fa";
 
-import { Quill } from "react-quill";
-
-
+// import { Quill} from "react-quill"; 
 // import { firestore } from "../../firebaseConfig";
+
 export default function EditDoc({ handleEdit,id}: functionInterface) {
-
-  
-
   const quillRef = useRef<any>(null)
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
+
   const [currentDocument,setCurrentDocument]=useState({
     title:"",
     value:"",
   })
+
+  let debounceTimeout : any;
+
+  const Changehandler = (e:any) => {
+      setValue(e);
+      
+      // // Clear the previous timeout to prevent it from triggering
+      
+      // socket?.emit('send-changes');
+  
+      // // Set a new timeout to emit changes after a specific delay (e.g., 500 milliseconds)
+      // debounceTimeout = setTimeout(() => {
+          
+      // }, 3000); // Adjust the delay as needed
+  };
+
   // const [isSaving, setIsSaving] = useState("");
 
 
@@ -93,9 +106,6 @@ useEffect(()=>{
   // }
 },[])
 
-
-
-
 function saveTodoc() {
   const content =
     "Title" +title+"\n"+value+"\n" 
@@ -104,7 +114,7 @@ function saveTodoc() {
   saveAs(blob, "testfile1.txt");
 }
 
-
+// Commented code 
 // function Export2Word(element: string, filename: string = ''): void {
 //   const preHtml: string = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
 //   const postHtml: string = "</body></html>";
@@ -190,14 +200,11 @@ function saveTodoc() {
 useEffect(()=>{
   setTitle(currentDocument.title)
   setValue(currentDocument.value)
-
-
 },[currentDocument])
 
-const [socket,setSocket]=useState();
-  const [quill,setquill]=useState();
+  const [socket,setSocket]=useState<any>();
+  
   useEffect(()=>{
-    // const sn= io("http://localhost:3001/");
     const s=io("http://localhost:3001");
     setSocket(s);
     return ()=>{
@@ -206,33 +213,30 @@ const [socket,setSocket]=useState();
   },[])
 
   useEffect(()=>{
+    if(socket ==null) return;
 
-    if(socket==null || quill ==null) return;
-
-    const handler=(delta:any,)=>{
-      quill.updateContents(delta)
+    const handler=()=>{
+      console.log("receive-changes")
+      getCurrentDocument()
+      // quillRef.current.focus()
     }
 
     socket.on('receive-changes',handler)
     return ()=>{
       socket.off('receive-changes',handler)
     }
-  },[socket,quill])
+  },[socket])
 
   useEffect(()=>{
-
-    if(socket==null || quill ==null) return;
-
+    if(socket==null) return;
+    
     const handler=(delta:any,oldDelta:any,source:any)=>{
       if(source!=='user') return;
+      console.log("Hello")
       socket.emit("send-changes",delta)
     }
 
-    quill.on('text-change',handler)
-    return ()=>{
-      quill.off('text-change',handler)
-    }
-  },[socket,quill])
+  },[socket,value])
 
 return(
 
@@ -252,7 +256,11 @@ return(
     <div className="quill-container">
       <EditorToolbar/>
 
-      <ReactQuill className="react-quill" theme="snow" ref={quillRef} value={value} onChange={setValue} modules={modules} formats={formats} id="exportContent"/>
+      <ReactQuill className="react-quill" theme="snow" onBlur={()=>{
+        setTimeout(()=>{
+          socket?.emit('send-changes');
+        }, 1000)
+      }} ref={quillRef} value={value} onChange={Changehandler} modules={modules} formats={formats} id="exportContent"/>
     </div>
   </div>
 
