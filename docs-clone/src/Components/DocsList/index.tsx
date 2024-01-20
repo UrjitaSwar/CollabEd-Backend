@@ -6,9 +6,11 @@ import LastSeen from "../../LastScene";
 
 type OpenDocType={
   openDoc:(id:string,value:string,title:string)=>void;
+  searchQuery : String;
+  reloadCounter : any
 }
 
-export default function DocsList({openDoc}:OpenDocType){
+export default function DocsList({openDoc, searchQuery, reloadCounter}:OpenDocType){
 
   const [docs,setDocs]=useState([{title:'',userName:"",value:"", id:""}])
 
@@ -20,10 +22,15 @@ export default function DocsList({openDoc}:OpenDocType){
 
   useEffect(()=>{
     getDocs();
-  },[])
+  },[reloadCounter])
   return(
     <div className="docs-main">
-      {docs.map((doc)=>{
+      {docs.filter((data)=>{
+        if(searchQuery != ""){
+          return data.title.toLowerCase().includes(searchQuery.toLowerCase());
+        }
+        return true;
+      }).map((doc)=>{
         return(
           <div className="doc-card" onClick={()=>openDoc(doc.id,doc.value,doc.title)}>
             <p className="doc-content" dangerouslySetInnerHTML={{__html:doc.value.substring(0,200)}}></p>

@@ -11,6 +11,7 @@ import { io } from "socket.io-client";
 import { FaArrowLeft } from "react-icons/fa";
 import { saveAs } from "file-saver";
 import { toast } from "react-toastify";
+import { limit } from "firebase/firestore";
 
 // import { Quill} from "react-quill";
 // import { firestore } from "../../firebaseConfig";
@@ -37,6 +38,7 @@ export default function EditDoc({ handleEdit, id }: functionInterface) {
     title: "",
     value: "",
   });
+
 
   let debounceTimeout: any;
 
@@ -108,11 +110,13 @@ export default function EditDoc({ handleEdit, id }: functionInterface) {
 
     var opt = {
       margin: 1,
-      filename: "myfile.pdf",
+      filename: title+"_doc",
       image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
+      html2canvas: { scale: 2, backgroundColor: "#ffffff" },
       jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      pdfOptions: { textColor: "#000000" },
     };
+  
 
     html2pdf().from(content).set(opt).save();
 
@@ -206,7 +210,10 @@ export default function EditDoc({ handleEdit, id }: functionInterface) {
   // })();
 
   useEffect(() => {
-    setTitle(currentDocument.title);
+    setTitle(()=>{
+     
+      return currentDocument.title
+    });
     setValue(currentDocument.value);
   }, [currentDocument]);
 

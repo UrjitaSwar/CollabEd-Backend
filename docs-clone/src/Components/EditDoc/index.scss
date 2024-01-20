@@ -5,7 +5,6 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     width: 50vw;
-  
     .saving-conf {
       text-align: left;
     }
@@ -13,7 +12,7 @@
 
 
   .back-react-icon{
-    position:absolute;
+    position:fixed;
     left:20px;
     top: 130px;
     cursor:pointer;
@@ -21,6 +20,16 @@
 
   }
   
+  .search-bar-icon{
+    position:absolute;
+    right:-10px;
+    bottom: -5px;
+    width: 15px;
+    background-color: #fff;
+    color: gray;
+
+  }
+
   .title-input {
     background-color: white;
     margin-top: 20px;
@@ -52,7 +61,7 @@
       font-size: 20px;
       color: black;
       background-color: white;
-      height: 300px;
+      height: 500px;
     }
   
     .ql-toolbar.ql-snow {

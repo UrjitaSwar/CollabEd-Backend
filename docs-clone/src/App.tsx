@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
-      <ToastContainer pauseOnHover={false} />
+      <ToastContainer pauseOnHover={false} limit={1} autoClose={2000}/>
       <Docs />
     </>
   );

@@ -16,7 +16,7 @@ io.on("connection", (socket) => {
   socket.handshake.headers.origin = "*";
 
   console.log(`Client connected: ${socket.id}`);
-
+  
   socket.on("send-changes",()=>{
     console.log("changes done")
     io.emit("receive-changes");

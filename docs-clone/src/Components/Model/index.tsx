@@ -12,7 +12,7 @@ const ModalComponent: React.FC<ModalProps> = ({ title, handleLogin }: ModalProps
     <>
       <div className='Login-Page-Class'>
         <h1>Welcome to Collabed</h1>
-        <Button size="large" type="primary" icon={<GoogleOutlined />} onClick={handleLogin}>
+        <Button size="large" type="dashed" icon={<GoogleOutlined />} onClick={handleLogin}>
           Sign In with Google
         </Button>
       </div>
