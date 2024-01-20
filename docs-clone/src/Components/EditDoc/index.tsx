@@ -44,7 +44,6 @@ export default function EditDoc({ handleEdit, id }: functionInterface) {
 
   const Changehandler = (e: any) => {
     setValue(e);
-    // // Clear the previous timeout to prevent it from triggering
 
     // socket?.emit('send-changes');
 
