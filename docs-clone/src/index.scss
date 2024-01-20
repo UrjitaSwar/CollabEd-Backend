@@ -1,14 +1,12 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-
-  /* Color for the background */
-  background-color: rgb(117, 163, 249);
-  // width: 100vh;
-
-
+  background: linear-gradient(45deg, #ffffff, #ffe0e0,#ffffff, #d3f4ff, #ffffff);
 }
 
+*{
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}

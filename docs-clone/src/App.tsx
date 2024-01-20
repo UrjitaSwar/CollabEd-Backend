@@ -1,24 +1,20 @@
 // import { useState } from 'react'
 
-import './App.scss'
-import Docs from "./Pages/Docs"
-
+import "./App.scss";
+import Docs from "./Pages/Docs";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
-
   return (
     <>
-
-    <Docs/>
-
+      <ToastContainer pauseOnHover={false} />
+      <Docs />
     </>
-  )
+  );
 }
 
-export default App
-
-
+export default App;
 
 //   return (
 //           <Docs/>
@@ -35,4 +31,3 @@ export default App
 //     //  </div>
 //   );
 //  };
- 

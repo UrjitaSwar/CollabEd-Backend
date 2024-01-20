@@ -1,21 +1,21 @@
 import React from 'react';
-import { Button} from 'antd';
+import { Button } from 'antd';
+import { GoogleOutlined } from '@ant-design/icons';
 
-type ModalProps={
+type ModalProps = {
+  title: string;
+  handleLogin: () => void;
+};
 
-    title:string;
-    handleLogin:()=>void
-}
-
-const ModalComponent: React.FC<ModalProps> = ({title,handleLogin}:ModalProps) => {
-  
-
+const ModalComponent: React.FC<ModalProps> = ({ title, handleLogin }: ModalProps) => {
   return (
     <>
-      <Button size="large" type="primary" onClick={handleLogin}>
-        {title}
-      </Button>
-
+      <div className='Login-Page-Class'>
+        <h1>Welcome to Collabed</h1>
+        <Button size="large" type="primary" icon={<GoogleOutlined />} onClick={handleLogin}>
+          Sign In with Google
+        </Button>
+      </div>
     </>
   );
 };

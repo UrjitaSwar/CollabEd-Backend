@@ -16,6 +16,7 @@
     "file-saver": "^2.0.2",
     "firebase": "^10.7.1",
     "fs": "0.0.1-security",
+    "html2pdf.js": "^0.10.1",
     "moment": "^2.30.1",
     "pizzip": "^3.1.4",
     "react": "^18.2.0",
@@ -25,6 +26,7 @@
     "react-quill": "^2.0.0",
     "react-redux": "^9.0.4",
     "react-scripts": "3.0.1",
+    "react-toastify": "^10.0.3",
     "sass": "^1.69.7",
     "save": "^2.9.0",
     "socket.io-client": "^4.7.4"

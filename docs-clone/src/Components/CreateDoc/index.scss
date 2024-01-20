@@ -1,29 +1,36 @@
 .new-doc-container {
-    background-color: rgb(224, 220, 220);
     display: flex;
     justify-content: center;
-    margin-top: 155px;
 
-
-
-    // width: 100vh;
-    width: 100vh;
     // overflow-y:auto;
 
-  
-    .new-doc-inner {
-      width: 100vh;
-      margin-left:20px;
-      
+}
+    .new-doc-inner {      
   
       .start-doc{
-        width: 170px;
-        height: 230px;
+        width: 200px;
+        height: 300px;
         cursor: pointer;
-        border: 1px solid #bcbcbc;
-  
+        border: none;
+        margin: 0px 15px;
         border-radius: 3px;
+        background-color: #fff;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 7px 10px #00000018;
+  
+      }
+
+      .start-doc-icon{
         
+        width: 100%;
+        font-size: 70px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        color: black;
       }
   
       .start-doc:hover {
@@ -36,7 +43,6 @@
         font-weight: bold;
         font-size: larger;
       }
-    }
   }
   
   @media (min-width: 767px) {

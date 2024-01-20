@@ -24,7 +24,7 @@ export default function Document({ photoURL }: TopbarProps) {
     setIsEdit(!isEdit)
   }
   return(
-    <div>
+    <div style={{width : "100%", height : "100%", display : "flex", justifyContent :"start", padding :"24px",paddingTop :"100px"}}>
       <Topbar photoURL={photoURL}/>
       <CreateDoc  id={id} handleEdit={handleEdit}  isEdit={isEdit}/>
       {isEdit? <></>:<DocsList openDoc={openDoc}/>}
