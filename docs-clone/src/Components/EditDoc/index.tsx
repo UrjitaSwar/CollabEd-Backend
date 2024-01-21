@@ -272,19 +272,17 @@ export default function EditDoc({ handleEdit, id }: functionInterface) {
           className="title-input"
           placeholder="Untitled"
         />
-        <div className="title-buttons">
-          <button onClick={saveTodoc}>Download Doc</button>
-          {/* <button onClick={Export2Word('exportContent','word-content.docx')}>Export as .doc</button>  */}
 
-          <button onClick={DeleteDoc}>Delete Doc</button>
-        </div>
+        <button id="speechtotext" onClick={toggleTextToSpeech}>
+            {isTextToSpeechActive
+              ? "Stop Doc Reading"
+              : "Start Doc Reading"}
+          </button>
+
+
         <div className="quill-container">
           <EditorToolbar />
-          <button onClick={toggleTextToSpeech}>
-            {isTextToSpeechActive
-              ? "Stop Text-to-Speech"
-              : "Start Text-to-Speech"}
-          </button>
+
           <ReactQuill
             className="react-quill"
             theme="snow"
@@ -300,6 +298,15 @@ export default function EditDoc({ handleEdit, id }: functionInterface) {
             formats={formats}
             id="exportContent"
           />
+
+
+        </div>
+
+        <div className="title-buttons">
+          <button onClick={saveTodoc}>Download Doc</button>
+          {/* <button onClick={Export2Word('exportContent','word-content.docx')}>Export as .doc</button>  */}
+
+          <button onClick={DeleteDoc} id="delete" >Delete Doc</button>
         </div>
       </div>
     </div>
