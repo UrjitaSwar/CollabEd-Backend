@@ -13,6 +13,10 @@ import { toast } from "react-toastify";
 import { limit } from "firebase/firestore";
 import TaskManager from "../TaskManager/TaskManager";
 import { Content } from "antd/es/layout/layout";
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { firestore } from "../../firebaseConfig";
+
+const userDocumentsCollection = 'userDocuments';
 
 import emailjs from '@emailjs/browser';
 import { Button, Modal, Input } from 'antd';
@@ -181,7 +185,24 @@ const templateId = 'template_mli5n6b';
 
 function shareViaEmail() {
   emailjs.init("N_jWQg1-xRldlDmGg");
-  console.log('Recipients:', recipients); // Log the recipients array
+  console.log('Recipients:', recipients); 
+  const documentId = id; 
+
+  
+  recipients.forEach(async (recipientEmail) => {
+    const recipientUserDocRef = doc(firestore, userDocumentsCollection, recipientEmail);
+    const recipientUserDocSnap = await getDoc(recipientUserDocRef);
+
+    if (recipientUserDocSnap.exists()) {
+      const updatedDocuments = [...recipientUserDocSnap.data().documents, documentId];
+      await updateDoc(recipientUserDocRef, { documents: updatedDocuments });
+    } else {
+      // If the userDocuments document for the recipient doesn't exist, create it
+      await setDoc(recipientUserDocRef, { documents: [documentId] });
+    }
+  });
+
+  // Continue with sending the email
   emailjs.send(serviceId, templateId, { title, content: quillRef.current.getEditor().root.innerHTML, recipients })
     .then((response) => {
       console.log('Email sent successfully!', response.status, response.text);
