@@ -214,94 +214,6 @@ function shareViaEmail() {
 }
 
 
-
-
-  // function saveTodoc() {
-  //   const content = "Title" + title + "\n" + value + "\n";
-
-  //   const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-  //   saveAs(blob, "testfile1.txt");
-  // }
-
-  // Commented code
-  // function Export2Word(element: string, filename: string = ''): void {
-  //   const preHtml: string = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
-  //   const postHtml: string = "</body></html>";
-  //   const html: string = preHtml + document.getElementById(element).innerHTML + postHtml;
-  //   // const html: string =  document.getElementById(element).innerHTML
-
-  //   const blob: Blob = new Blob(['\ufeff', html], {
-  //     type: 'application/msword'
-  //   });
-  //   // Specify link url
-  //   const url: string = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
-  //   // Specify file name
-  //   filename = filename ? filename + '.doc' : 'document.doc';
-  //   // Create download link element
-  //   const downloadLink: HTMLAnchorElement = document.createElement("a");
-  //   document.body.appendChild(downloadLink);
-
-  //   // (window.navigator as any).msSaveOrOpenBlob(blob, filename);
-
-  //   const nav = (window.navigator as any);
-  //   if (nav.msSaveOrOpenBlob) {
-  //     nav.msSaveOrOpenBlob(blob, filename);
-  //   }else {
-  //     // Create a link to the file
-  //     downloadLink.href = url;
-  //     // Setting the file name
-  //     downloadLink.download = filename;
-  //     //triggering the function
-  //     downloadLink.click();
-  //   }
-  //   document.body.removeChild(downloadLink);
-  //   // (window.navigator as any).msSaveOrOpenBlob(blob, filename);
-
-  // }
-
-  // (function() {
-  //   var mousePos:any;
-
-  //   document.onmousemove = handleMouseMove;
-  //   setInterval(getMousePosition, 100); // setInterval repeats every X ms
-
-  //   function handleMouseMove(event:any) {
-  //       var dot, eventDoc, doc, body, pageX, pageY;
-
-  //       event = event || window.event; // IE-ism
-
-  //       // If pageX/Y aren't available and clientX/Y are,
-  //       // calculate pageX/Y - logic taken from jQuery.
-  //       // (This is to support old IE)
-  //       if (event.pageX == null && event.clientX != null) {
-  //           eventDoc = (event.target && event.target.ownerDocument) || document;
-  //           doc = eventDoc.documentElement;
-  //           body = eventDoc.body;
-
-  //           event.pageX = event.clientX +
-  //             (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-  //             (doc && doc.clientLeft || body && body.clientLeft || 0);
-  //           event.pageY = event.clientY +
-  //             (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-  //             (doc && doc.clientTop  || body && body.clientTop  || 0 );
-  //       }
-
-  //       mousePos = {
-  //           x: event.pageX,
-  //           y: event.pageY
-  //       };
-  //   }
-  //   function getMousePosition() {
-  //       var pos = mousePos;
-  //       if (!pos) {
-  //           // We haven't seen any movement yet
-  //       }
-  //       else {
-  //           // Use pos.x and pos.y
-  //       }
-  //   }
-  // })();
-
   useEffect(() => {
     setTitle(()=>{
      
@@ -357,9 +269,8 @@ function shareViaEmail() {
     >
       <div className="edit-container">
         <FaArrowLeft onClick={handleEdit} size={30} className="back-react-icon" />
-
   
-        {/* <ShareDocumentByEmail id={id} title={title} content={value} /> */}
+{/*         <ShareDocumentByEmail id={id} title={title} content={value} /> */}
 
         <button id="speechtotext" onClick={toggleTextToSpeech}>
             {isTextToSpeechActive
@@ -386,46 +297,7 @@ function shareViaEmail() {
             formats={formats}
             id="exportContent"
           />
-          
-          {/* <Quill
-            className="react-quill"
-            theme="snow"
-            onBlur={() => {
-              setTimeout(() => {
-                socket?.emit("send-changes");
-              }, 1000);
-            }}
-            ref={quillRef}
-            value={value}
-            onChange={Changehandler}
-            modules={modules}
-            formats={formats}
-            id="exportContent"
-          /> */}
   </div>
-  {/* <div className="taskmanager-container">
-           <Quill
-            className="react-quill"
-            theme="snow"
-            onBlur={() => {
-              setTimeout(() => {
-                socket?.emit("send-changes");
-              }, 1000);
-            }}
-            ref={quillRef}
-            value={value}
-            onChange={Changehandler}
-            modules={modules}
-            formats={formats}
-            id="exportContent"
-          />
-          <TaskManager/>
-  </div> */}
-
-
-
-
-
         <div className="title-buttons">
           <button onClick={saveTodoc}>Download Doc</button>
           {/* <button onClick={Export2Word('exportContent','word-content.docx')}>Export as .doc</button>  */}
